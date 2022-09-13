@@ -62,12 +62,13 @@
                 <td>@d.RestaurantName</td>
                 <td>@d.CuisineName</td>
                <td>@d.Status</td>
+              
                 <td>
                     @Html.ActionLink("EDIT", "EditCusine", new { CuisineID = @d.CuisineID})
                     
                 </td>
                 <td>
-                    @Html.ActionLink("DELETE", "EditCusine", new { CuisineID = @d.CuisineID})
+                    @Html.ActionLink("DELETE", "DeleteCuisine", new { CuisineID = @d.CuisineID})
                 </td>
                
             </tr>

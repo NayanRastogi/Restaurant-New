@@ -10,6 +10,10 @@ namespace Restaurant.Models
     {
         public int CustomerID { get; set; }
         public int RestaurantID { get; set; }
+
+        [DataType(DataType.Text)]
+        [Required(ErrorMessage ="Use Only Characters")]
+        [RegularExpression("[A-Za-z]*", ErrorMessage = "Invalid Name ")]
         public string CustomerName { get; set; }
 
         [DataType(DataType.PhoneNumber)]

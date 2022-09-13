@@ -1,8 +1,8 @@
 ﻿@model Restaurant.Models.Cuisine
-@{
-    ViewBag.Title = "Edit Cuisine Details";
-}
 
+@{
+    ViewBag.Title = "Insert New Cuisine Details";
+}
 
 <html>
 <head>
@@ -43,30 +43,23 @@
 </head>
 <body>
 
-    @using (Html.BeginForm("EditCusine", "Cuisine", FormMethod.Post, new { @class = "form-group" }))
+    @using (Html.BeginForm("InsertCusine", "Cuisine", FormMethod.Post, new { @class = "form-group" }))
     {
         <table>
             <tr>
-                <th colspan="2"><h2>Edit Cuisine Details</h2></th>
+                <th colspan="2"><h2>Create New Cuisine Details</h2></th>
             </tr>
-
-            @*<tr>
-                <td>
-                    @Html.ActionLink("Cuisine", "Cuisine", new { @class = "" })
-
-                </td>
-            </tr>*@
-
-            
-            @Html.HiddenFor(a => a.CuisineID)
+              
+           
             <tr>
                 <td>
                     Restaurant Name:
                 </td>
 
                 <td>
-                    @Html.DisplayFor(a => a.RestaurantName)
-                   @* @Html.HiddenFor(a => a.RestaurantID)*@
+
+                    @Html.DropDownList("RestaurantName", new SelectList(ViewBag.Data, "RestaurantID", "RestaurantName"),"-------Select Restaurant-------")
+                  @*@Html.HiddenFor(a=>a.RestaurantID)*@
                 </td>
             </tr>
 
@@ -76,20 +69,20 @@
                 </td>
 
                 <td>
-                    @Html.TextBoxFor(a => a.CuisineName)
-                    
+                  @Html.TextBoxFor(a=>a.CuisineName)
+
                 </td>
             </tr>
 
-           
+
 
             <tr>
-                
+
                 <td>
-                    @Html.Hidden("CuisineID", (object)@ViewBag.CuisineID)
-                    <input id="Submit1" type="submit" value="Update" class="btn-primary" />
+                    
+                    <input id="Submit1" type="submit" value="Insert" class="btn-primary" />
                 </td>
-                
+
 
             </tr>
         </table>
@@ -97,12 +90,12 @@
 </body>
 </html>
 @{
-    if (ViewData["ResultUpdate"] != "" && ViewData["ResultUpdate"] != null)
+    if (ViewData["ResultInsert"] != "" && ViewData["ResultInsert"] != null)
     {
-        ViewData["ResultUpdate"] = null;
+        ViewData["ResultInsert"] = null;
         <script type="text/javascript" language="javascript">
-            alert("Data Updated Successfully");            
+            alert("Data Insert Successfully");
         </script>
     }
-   
+
 }

@@ -216,133 +216,103 @@ namespace BusinessLogicLayer
             objSqlParam[8].Direction = ParameterDirection.Output;
             objSqlParam[9] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
             objSqlParam[9].Direction = ParameterDirection.Output;
-            DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "spState", objSqlParam);
-            //if (dsResult != null && dsResult.Tables.Count > 0)
-            //    dtResult = dsResult.Tables[0];
+            DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Restaurants", objSqlParam);
+            
             Error = Convert.ToString(objSqlParam[9].Value);
             if (Error != string.Empty)
             {
                 throw new ArgumentException(Error);
             }
-            return dtResult;
+            return dsResult.Tables[0];
         }
 
         public DataTable GetRestaurantByRestaurantID(int RestaurantID)
         {
             DataTable dtResult = new DataTable();
-            SqlParameter[] objSqlParam = new SqlParameter[10];
+            SqlParameter[] objSqlParam = new SqlParameter[7];
             objSqlParam[0] = new SqlParameter("@Flag", 5);
             objSqlParam[1] = new SqlParameter("@RestaurantID", RestaurantID);
-            objSqlParam[2] = new SqlParameter("@RestaurantName", RestaurantName);
-            objSqlParam[3] = new SqlParameter("@RestaurantAddress", RestaurantAddress);
-            objSqlParam[4] = new SqlParameter("@MobileNo", "MobileNo");
-            objSqlParam[5] = new SqlParameter("@Status", "Available");
-            objSqlParam[6] = new SqlParameter("@UserId", 1);
-            objSqlParam[7] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
-            objSqlParam[7].Direction = ParameterDirection.Output;
-            objSqlParam[8] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
-            objSqlParam[8].Direction = ParameterDirection.Output;
-            objSqlParam[9] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
-            objSqlParam[9].Direction = ParameterDirection.Output;
-            DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "spState", objSqlParam);
+            objSqlParam[2] = new SqlParameter("@Status", "Available");
+            objSqlParam[3] = new SqlParameter("@UserId", 1);
+            objSqlParam[4] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
+            objSqlParam[4].Direction = ParameterDirection.Output;
+            objSqlParam[5] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
+            objSqlParam[5].Direction = ParameterDirection.Output;
+            objSqlParam[6] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
+            objSqlParam[6].Direction = ParameterDirection.Output;
+            DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Restaurants", objSqlParam);
             //if (dsResult != null && dsResult.Tables.Count > 0)
             //    dtResult = dsResult.Tables[0];
-            Error = Convert.ToString(objSqlParam[9].Value);
+            Error = Convert.ToString(objSqlParam[6].Value);
             if (Error != string.Empty)
             {
                 throw new ArgumentException(Error);
             }
             return dtResult;
         }
+        public DataTable InsertRestaurant(int RestaurantID)
+        {
 
-        //public DataTable GetCity()
-        //{
-        //    DataTable dtResult = new DataTable();
-        //    SqlParameter[] objSqlParam = new SqlParameter[5];
-        //    objSqlParam[0] = new SqlParameter("@Flag", 2);
-        //    objSqlParam[1] = new SqlParameter("@RestaurantID", RestaurantID);
-        //    objSqlParam[2] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
-        //    objSqlParam[2].Direction = ParameterDirection.Output;
-        //    objSqlParam[3] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
-        //    objSqlParam[3].Direction = ParameterDirection.Output;
-        //    objSqlParam[4] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
-        //    objSqlParam[4].Direction = ParameterDirection.Output;
-        //    DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "spState", objSqlParam);
-        //    if (dsResult != null && dsResult.Tables.Count > 0)
-        //        dtResult = dsResult.Tables[0];
-        //    Error = Convert.ToString(objSqlParam[4].Value);
-        //    if (Error != string.Empty)
-        //    {
-        //        throw new ArgumentException(Error);
-        //    }
-        //    return dtResult;
-        //}
+            DataTable dtResult = new DataTable();
+            SqlParameter[] objSqlParam = new SqlParameter[9];
+            objSqlParam[0] = new SqlParameter("@Flag", 2);
+            objSqlParam[1] = new SqlParameter("@RestaurantName", RestaurantName);
+            objSqlParam[2] = new SqlParameter("@RestaurantAddress", RestaurantAddress);
+            objSqlParam[3] = new SqlParameter("@MobileNo", "MobileNo");
+            objSqlParam[4] = new SqlParameter("@Status", "Available");
+            objSqlParam[5] = new SqlParameter("@UserId", 1);
+            objSqlParam[6] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
+            objSqlParam[6].Direction = ParameterDirection.Output;
+            objSqlParam[7] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
+            objSqlParam[7].Direction = ParameterDirection.Output;
+            objSqlParam[8] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
+            objSqlParam[8].Direction = ParameterDirection.Output;
+            SqlHelper.ExecuteNonQuery(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Restaurants", objSqlParam);
+            return dtResult;
+        }
 
-        //public DataTable GetCountry()
-        //{
-        //    DataTable dtResult = new DataTable();
-        //    SqlParameter[] objSqlParam = new SqlParameter[4];
-        //    objSqlParam[0] = new SqlParameter("@Flag", 3);
-        //    objSqlParam[1] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
-        //    objSqlParam[1].Direction = ParameterDirection.Output;
-        //    objSqlParam[2] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
-        //    objSqlParam[2].Direction = ParameterDirection.Output;
-        //    objSqlParam[3] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
-        //    objSqlParam[3].Direction = ParameterDirection.Output;
-        //    DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "spState", objSqlParam);
-        //    if (dsResult != null && dsResult.Tables.Count > 0)
-        //        dtResult = dsResult.Tables[0];
-        //    Error = Convert.ToString(objSqlParam[3].Value);
-        //    if (Error != string.Empty)
-        //    {
-        //        throw new ArgumentException(Error);
-        //    }
-        //    return dtResult;
-        //}
+        public DataTable UpdateRestaurant(int RestaurantID)
+        {
 
-        //public DataTable GetRegCompany()
-        //{
-        //    DataTable dtResult = new DataTable();
-        //    SqlParameter[] objSqlParam = new SqlParameter[5];
-        //    objSqlParam[0] = new SqlParameter("@Flag", 4);
-        //    objSqlParam[2] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
-        //    objSqlParam[2].Direction = ParameterDirection.Output;
-        //    objSqlParam[3] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
-        //    objSqlParam[3].Direction = ParameterDirection.Output;
-        //    objSqlParam[4] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
-        //    objSqlParam[4].Direction = ParameterDirection.Output;
-        //    DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "spState", objSqlParam);
-        //    if (dsResult != null && dsResult.Tables.Count > 0)
-        //        dtResult = dsResult.Tables[0];
-        //    Error = Convert.ToString(objSqlParam[4].Value);
-        //    if (Error != string.Empty)
-        //    {
-        //        throw new ArgumentException(Error);
-        //    }
-        //    return dtResult;
-        //}
+            DataTable dtResult = new DataTable();
+            SqlParameter[] objSqlParam = new SqlParameter[9];
+            objSqlParam[0] = new SqlParameter("@Flag", 3);
+           
+            objSqlParam[1] = new SqlParameter("@RestaurantName", RestaurantName);
+            objSqlParam[2] = new SqlParameter("@RestaurantAddress", RestaurantAddress);
+            objSqlParam[3] = new SqlParameter("@MobileNo", "MobileNo");
+            objSqlParam[4] = new SqlParameter("@Status", "Available");
+            objSqlParam[5] = new SqlParameter("@UserId", 1);
+            objSqlParam[6] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
+            objSqlParam[6].Direction = ParameterDirection.Output;
+            objSqlParam[7] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
+            objSqlParam[7].Direction = ParameterDirection.Output;
+            objSqlParam[8] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
+            objSqlParam[8].Direction = ParameterDirection.Output;
+            SqlHelper.ExecuteNonQuery(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Restaurants", objSqlParam);
+            return dtResult;
+        }
 
-        //public DataTable GetDays()
-        //{
-        //    DataTable dtResult = new DataTable();
-        //    SqlParameter[] objSqlParam = new SqlParameter[4];
-        //    objSqlParam[0] = new SqlParameter("@Flag", 1);
-        //    objSqlParam[1] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
-        //    objSqlParam[1].Direction = ParameterDirection.Output;
-        //    objSqlParam[2] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
-        //    objSqlParam[2].Direction = ParameterDirection.Output;
-        //    objSqlParam[3] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
-        //    objSqlParam[3].Direction = ParameterDirection.Output;
-        //    DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "spDay", objSqlParam);
-        //    if (dsResult != null && dsResult.Tables.Count > 0)
-        //        dtResult = dsResult.Tables[0];
-        //    Error = Convert.ToString(objSqlParam[3].Value);
-        //    if (Error != string.Empty)
-        //    {
-        //        throw new ArgumentException(Error);
-        //    }
-        //    return dtResult;
-        //}
+        public DataTable DeleteRestaurant()
+        {
+
+            DataTable dtResult = new DataTable();
+            SqlParameter[] objSqlParam = new SqlParameter[7];
+            objSqlParam[0] = new SqlParameter("@Flag", 4);
+            objSqlParam[1] = new SqlParameter("@RestaurantID", RestaurantID);
+            objSqlParam[2] = new SqlParameter("@Status", "Delete");
+            objSqlParam[3] = new SqlParameter("@UserId", 1);
+            objSqlParam[4] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
+            objSqlParam[4].Direction = ParameterDirection.Output;
+            objSqlParam[5] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
+            objSqlParam[5].Direction = ParameterDirection.Output;
+            objSqlParam[6] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
+            objSqlParam[6].Direction = ParameterDirection.Output;
+            SqlHelper.ExecuteNonQuery(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Restaurants", objSqlParam);
+            return dtResult;
+        }
+
+
 
         #endregion
     }

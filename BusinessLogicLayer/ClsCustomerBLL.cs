@@ -199,58 +199,7 @@ namespace BusinessLogicLayer
 
         #region Public Methods Section
 
-        //public DataTable SelectCuisine()
-        //{
-        //    SqlParameter[] objSqlParam = new SqlParameter[9];
-        //    objSqlParam[0] = new SqlParameter("@Flag", 1);
-        //    objSqlParam[1] = new SqlParameter("@CuisineID", CuisineID);
-        //    objSqlParam[2] = new SqlParameter("@RestaurantID", RestaurantID);
-        //    objSqlParam[3] = new SqlParameter("@CuisineName", CuisineName);
-        //    objSqlParam[4] = new SqlParameter("@Status", "Available");
-        //    objSqlParam[5] = new SqlParameter("@UserId", 1);
-        //    objSqlParam[6] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
-        //    objSqlParam[6].Direction = ParameterDirection.Output;
-        //    objSqlParam[7] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
-        //    objSqlParam[7].Direction = ParameterDirection.Output;
-        //    objSqlParam[8] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
-        //    objSqlParam[8].Direction = ParameterDirection.Output;
-        //    DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Cuisine", objSqlParam);
-        //    //if (dsResult != null && dsResult.Tables.Count > 0)
-        //    //    dtResult = dsResult.Tables[0];
-        //    Error = Convert.ToString(objSqlParam[8].Value);
-        //    if (Error != string.Empty)
-        //    {
-        //        throw new ArgumentException(Error);
-        //    }
-        //    return dsResult.Tables[0];
-
-        //}
-
-
-        //public DataTable SelectCuisineByCuisineID()
-        //{
-        //    SqlParameter[] objSqlParam = new SqlParameter[5];
-        //    objSqlParam[0] = new SqlParameter("@Flag", 5);
-        //    objSqlParam[1] = new SqlParameter("@CuisineID", CuisineID);
-
-        //    objSqlParam[2] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
-        //    objSqlParam[2].Direction = ParameterDirection.Output;
-        //    objSqlParam[3] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
-        //    objSqlParam[3].Direction = ParameterDirection.Output;
-        //    objSqlParam[4] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
-        //    objSqlParam[4].Direction = ParameterDirection.Output;
-        //    DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Cuisine", objSqlParam);
-        //    //if (dsResult != null && dsResult.Tables.Count > 0)
-        //    //    dtResult = dsResult.Tables[0];
-        //    Error = Convert.ToString(objSqlParam[4].Value);
-        //    if (Error != string.Empty)
-        //    {
-        //        throw new ArgumentException(Error);
-        //    }
-        //    return dsResult.Tables[0];
-
-        //}
-
+       
         public DataTable InsertCustomerDetails()
         {
 
