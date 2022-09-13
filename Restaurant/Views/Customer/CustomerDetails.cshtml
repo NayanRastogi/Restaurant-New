@@ -1,0 +1,103 @@
+﻿@model Restaurant.Models.CustomerModel
+
+@{
+
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <style type="text/css">
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
+
+        td {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    @using (Html.BeginForm("CustomerDetails", "Customer", FormMethod.Post, new { @class = "form-group" }))
+    {
+        <table>
+            <tr>
+                <th colspan="2"><h2>Customer Details</h2></th>
+            </tr>
+          <tr>
+                <td>
+                    Restaurant Name:
+                </td>
+
+                <td>
+                   @* @Html.DisplayFor(a => a.RestaurantName)*@
+                   @* @Html.HiddenFor(a => a.RestaurantID)*@
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Customer Name:
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(a => a.CustomerName)
+                    
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Mobile Number:
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(a => a.MobileNo)
+                    
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>@Html.ValidationMessageFor(a => a.MobileNo)</td>
+            </tr>
+            <tr>
+
+            <tr>
+               
+                <td>
+                    @Html.Hidden("CuisineID", (object)@ViewBag.CuisineID)
+                    <input id="Submit1" type="submit" value="Insert" class="btn-primary" />
+                </td>
+                
+
+            </tr>
+        </table>
+    }
+</body>
+</html>
+

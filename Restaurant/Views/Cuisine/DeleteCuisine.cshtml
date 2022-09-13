@@ -1,0 +1,101 @@
+﻿@model Restaurant.Models.Cuisine
+@{
+    ViewBag.Title = "Delete Cuisine Details";
+}
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+    <style type="text/css">
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
+
+        td {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    @using (Html.BeginForm("EditCusine", "Cuisine", FormMethod.Post, new { @class = "form-group" }))
+    {
+        <table>
+            <tr>
+                <th colspan="2"><h2>Delete Cuisine Details</h2></th>
+            </tr>
+
+
+
+            @Html.HiddenFor(a => a.CuisineID)
+            <tr>
+                <td>
+                    Restaurant Name:
+                </td>
+
+                <td>
+                    @Html.DisplayFor(a => a.RestaurantName)
+                    
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Cuisine Name:
+                </td>
+
+                <td>
+                    @Html.TextBoxFor(a => a.CuisineName)
+
+                </td>
+            </tr>
+
+
+
+            <tr>
+                <td></td>
+                <td>
+                    @Html.Hidden("CuisineID", (object)@ViewBag.CuisineID)
+                    <input id="Submit1" type="submit" value="Delete" class="btn-primary" />
+                </td>
+
+
+            </tr>
+        </table>
+    }
+</body>
+</html>
+@{
+    if (ViewData["ResultDelete"] != "" && ViewData["ResultDelete"] != null)
+    {
+        ViewData["ResultDelete"] = null;
+        <script type="text/javascript" language="javascript">
+            alert("Data Deleted Successfully");
+        </script>
+    }
+
+}
