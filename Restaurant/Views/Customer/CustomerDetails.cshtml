@@ -55,8 +55,7 @@
                 </td>
 
                 <td>
-                   @* @Html.DisplayFor(a => a.RestaurantName)*@
-                   @* @Html.HiddenFor(a => a.RestaurantID)*@
+                    @Html.DropDownList("RestaurantID", new SelectList(ViewBag.Data, "RestaurantID", "RestaurantName"),"-------Select Restaurant-------")
                 </td>
             </tr>
 
@@ -69,6 +68,10 @@
                     @Html.TextBoxFor(a => a.CustomerName)
                     
                 </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>@Html.ValidationMessageFor(a => a.CustomerName)</td>
             </tr>
 
             <tr>
@@ -88,9 +91,9 @@
             <tr>
 
             <tr>
-               
+               <td></td>
                 <td>
-                    @Html.Hidden("CuisineID", (object)@ViewBag.CuisineID)
+                    
                     <input id="Submit1" type="submit" value="Insert" class="btn-primary" />
                 </td>
                 
@@ -100,4 +103,14 @@
     }
 </body>
 </html>
+@{
+    if (ViewData["ResultInsert"] != "" && ViewData["ResultInsert"] != null)
+    {
+        ViewData["ResultInsert"] = null;
+        <script type="text/javascript" language="javascript">
+            alert("Data Insert Successfully");
+        </script>
+    }
+
+}
 

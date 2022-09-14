@@ -58,8 +58,8 @@
 
                 <td>
 
-                    @Html.DropDownList("RestaurantName", new SelectList(ViewBag.Data, "RestaurantID", "RestaurantName"),"-------Select Restaurant-------")
-                  @*@Html.HiddenFor(a=>a.RestaurantID)*@
+                    @Html.DropDownList("RestaurantID", new SelectList(ViewBag.Data, "RestaurantID", "RestaurantName"),"-------Select Restaurant-------")
+                
                 </td>
             </tr>
 
@@ -77,10 +77,10 @@
 
 
             <tr>
-
+                <td></td>
                 <td>
-                    
-                    <input id="Submit1" type="submit" value="Insert" class="btn-primary" />
+                    @*@Html.Hidden("RestaurantID", (object)@ViewBag.RestaurantID)*@
+                    <input id="Submit1" type="submit" value="Update" class="btn-primary" />
                 </td>
 
 

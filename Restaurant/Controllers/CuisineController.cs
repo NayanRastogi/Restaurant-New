@@ -3,6 +3,7 @@ using Restaurant.Models;
 using BusinessLogicLayer;
 using System.Data;
 using System.Collections.Generic;
+using System;
 
 namespace Restaurant.Controllers
 {
@@ -32,6 +33,7 @@ namespace Restaurant.Controllers
 
         public IActionResult InsertCuisine()
         {
+           // objrebll.RestaurantID = Convert.ToInt16((RestaurantID).ToString());
             List<RestaurantModel> lstRest = new List<RestaurantModel>();
             DataTable dt = objrebll.GetRestaurant();
             //var items = dt.To;
@@ -43,23 +45,26 @@ namespace Restaurant.Controllers
                 objres.RestaurantName = dt.Rows[i]["RestaurantName"].ToString();
 
                 lstRest.Add(objres);
+              
             }
             ViewBag.Data = lstRest;
-           
-
+            
             return View();
         }
+
+
         [HttpPost]
-        public IActionResult InsertCuisine(ClsCuisionBLL objcu)
+        public IActionResult InsertCuisine(ClsCustomerBLL objcu)
         {
+            //objrebll.RestaurantID = Convert.ToInt16((RestaurantID).ToString());
             Cuisine clsCuisine = new Cuisine();
             DataTable result = objcubll.InsertCuisine(objcubll);
-            ViewData["ResultUpdate"] = result; // for dislaying message after updating data.
-            return View(clsCuisine);
-            
+            ViewData["ResultInsert"] = result; // for dislaying message after updating data.
+            return View("Cuisine", "Cuisine");
+
         }
-            // Edit gridview data
-            public IActionResult EditCusine(int CuisineID)
+        // Edit gridview data
+        public IActionResult EditCusine(int CuisineID)
         {
             objcubll.CuisineID = Convert.ToInt16(CuisineID);
             DataTable dt = objcubll.SelectCuisineByCuisineID();
@@ -80,7 +85,7 @@ namespace Restaurant.Controllers
             //objcubll.CuisineID = Convert.ToInt16(CuisineID);
             
             Cuisine clsCuisine = new Cuisine();
-            DataTable result = objcubll.UpdateCuisine(objcubll);
+            DataTable result = objcubll.UpdateCuisine(objcu);
             ViewData["ResultUpdate"] = result; // for dislaying message after updating data.
             return View(clsCuisine);
 
@@ -105,10 +110,10 @@ namespace Restaurant.Controllers
 
 
         [HttpPost]
-        public ActionResult DeleteCuisine(ClsCuisionBLL objcubll)
+        public ActionResult DeleteCuisine(ClsCuisionBLL objcu)
         {
             Cuisine clsCuisine = new Cuisine();
-            DataTable result = objcubll.DeleteCuisine(objcubll);
+            DataTable result = objcubll.DeleteCuisine(objcu);
             ViewData["ResultDelete"] = result; // for dislaying message after deleting data.
             return View(clsCuisine);
         }

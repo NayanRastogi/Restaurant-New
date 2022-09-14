@@ -12,16 +12,16 @@ namespace Restaurant.Models
         public int RestaurantID { get; set; }
 
         [DataType(DataType.Text)]
-        [Required(ErrorMessage ="Use Only Characters")]
+        [Required(ErrorMessage = "Use Only Characters")]
         [RegularExpression("[A-Za-z]*", ErrorMessage = "Invalid Name ")]
-        public string CustomerName { get; set; }
+        public string CustomerName { get; set; } = "";
 
         [DataType(DataType.PhoneNumber)]
         [Required(ErrorMessage = "10 Digit Mobile Number")]
         [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Enter 10 Digit Number Start From 9,8,7")]
-        public string MobileNo { get; set; } 
+        public string MobileNo { get; set; } = "";
 
-        public string Status { get; set; }
+        public string Status { get; set; } = "";
 
     }
 }
