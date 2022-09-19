@@ -230,8 +230,7 @@ namespace BusinessLogicLayer
             objSqlParam[4] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
             objSqlParam[4].Direction = ParameterDirection.Output;
             DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Cuisine", objSqlParam);
-            //if (dsResult != null && dsResult.Tables.Count > 0)
-            //    dtResult = dsResult.Tables[0];
+           
             Error = Convert.ToString(objSqlParam[4].Value);
             if (Error != string.Empty)
             {
@@ -244,7 +243,6 @@ namespace BusinessLogicLayer
         public void InsertCuisineDetails()
         {
 
-            DataTable dtResult = new DataTable();
             SqlParameter[] objSqlParam = new SqlParameter[8];
             objSqlParam[0] = new SqlParameter("@Flag", 2);
             objSqlParam[1] = new SqlParameter("@RestaurantID",RestaurantID);

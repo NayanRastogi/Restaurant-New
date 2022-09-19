@@ -10,7 +10,6 @@ namespace Restaurant.Controllers
 {
     public class CustomerController : Controller
     {
-        ClsCustomerBLL objcubll = new ClsCustomerBLL();
         ClsRestaurantBLL objrebll = new ClsRestaurantBLL();
         
         public IActionResult CustomerDetails()
@@ -35,7 +34,6 @@ namespace Restaurant.Controllers
             GetRestaurant();
 
 
-            //return RedirectToAction("InsertBillDetail","Bill");
             return View();
         }
 

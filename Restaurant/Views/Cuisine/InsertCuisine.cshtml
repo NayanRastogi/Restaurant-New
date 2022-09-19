@@ -40,32 +40,12 @@
             font-weight: bold;
         }
     </style>
-    @section Scripts{
-
-
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
-        <script type="text/javascript" src="/scripts/main.js"></script>
-        <script type="text/javascript">
-            $(function () {
-
-                $('#ddlRestaurant').on("change"(function () {
-                    debugger;
-                    alert('hii');
-                    //Get Dropdownlist seleted item text
-                   
-                    ViewData["ResName"] = $("#ddlRestaurant:selected").text();
-                    //Get Dropdownlist selected item value
-                    ViewData["ResId"] = $("#ddlRestaurant").val();
-                    //alert($("#UserId").val());
-                    alert("#ddlRestaurant");
-                })
-                    })
-        </script>
-    }
+   
+    
 </head>
 <body>
 
-    @using (Html.BeginForm("InsertCusine", "Cuisine", FormMethod.Post, new { @class = "form-group" }))
+    @using (Html.BeginForm("InsertCuisine", "Cuisine", FormMethod.Post, new { @class = "form-group" }))
     {
         <table>
             <tr>
@@ -95,7 +75,10 @@
 
                 </td>
             </tr>
-
+            <tr>
+                <td></td>
+                <td>@Html.ValidationMessageFor(a => a.CuisineName)</td>
+            </tr>
 
 
             <tr>
@@ -120,5 +103,5 @@
 </html>
 
 
-}
+
 

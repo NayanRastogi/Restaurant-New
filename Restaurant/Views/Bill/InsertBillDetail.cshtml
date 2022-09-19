@@ -1,16 +1,12 @@
 ﻿@model Restaurant.Models.BillModel
 
-@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    @* <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>*@
+   
 
     <style type="text/css">
         input[type=text], select {
@@ -57,42 +53,25 @@
                 </td>
 
                 <td>
-                   @* @Html.DropDownListFor(a =>a.RestaurantID, new SelectList(ViewBag.Data, "RestaurantID", "RestaurantName"),"-------Select Restaurant-------")*@
-                    @*@Html.DropDownListFor(a => a.RestaurantID, (SelectList)ViewBag.lstrest),"-------Select Restaurant-------")*@
+                    @Html.DropDownListFor(a =>a.CustomerID, new SelectList(ViewBag.Data, "CustomerID", "CustomerName"),"-------Select Customer-------")
+                    
 
                 </td>
             </tr>
 
             <tr>
                 <td>
-                    Customer Name:
+                    Order ID
                 </td>
 
                 <td>
-                   @* @Html.TextBoxFor(a => a.CustomerName)*@
+                    @Html.TextBoxFor(a => a.OrderID)
 
                 </td>
             </tr>
-            <tr>
-                <td></td>
-               @* <td>@Html.ValidationMessageFor(a => a.CustomerName)</td>*@
-            </tr>
-
-            <tr>
-                <td>
-                    Mobile Number:
-                </td>
-
-                <td>
-                  @*  @Html.TextBoxFor(a => a.MobileNo)*@
-
-                </td>
-            </tr>
-            <tr>
-                <td></td>
-                @*<td>@Html.ValidationMessageFor(a => a.MobileNo)</td>*@
-            </tr>
-            <tr>
+           
+           
+            
 
             <tr>
                 <td></td>

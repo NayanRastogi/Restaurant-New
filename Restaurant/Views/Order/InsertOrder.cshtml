@@ -1,4 +1,4 @@
-﻿
+﻿@model Restaurant.Models.OrderModel
 @{
 }
 <html>
@@ -44,7 +44,7 @@
 </head>
 <body>
 
-    @using (Html.BeginForm("InsertCusine", "Cuisine", FormMethod.Post, new { @class = "form-group" }))
+    @using (Html.BeginForm("InsertOrder", "Order", FormMethod.Post, new { @class = "form-group" }))
     {
         <table>
             <tr>
@@ -58,8 +58,8 @@
 
                 <td>
 
-                   @* @Html.DropDownListFor(a=>a.RestaurantID, new SelectList(ViewBag.Data, "RestaurantID", "RestaurantName"),"-------Select Restaurant-------")
-*@
+                    @Html.DropDownList("RestaurantID", new SelectList(ViewBag.Data, "RestaurantID", "RestaurantName"),"-------Select Restaurant-------")
+
                 </td>
             </tr>
 
@@ -70,7 +70,7 @@
 
                 <td>
 
-                   @* @Html.DropDownListFor(a=>a.MenuItemID, new SelectList(ViewBag.Data, "MenuItemID", "MenuItemName"),"-------Select MenuItem-------")*@
+                    @Html.DropDownList("MenuItemID", new SelectList(ViewBag.Data, "MenuItemID", "MenuItemName"),"-------Select MenuItem-------")
 
                 </td>
             </tr>
@@ -80,7 +80,7 @@
                 </td>
 
                 <td>
-                    @Html.TextBoxFor(a=>a)
+                    @Html.TextBoxFor(a=>a.ItemQuantity)
 
                 </td>
             </tr>
@@ -93,7 +93,7 @@
 
                 <td>
 
-                   @* @Html.DropDownListFor(a=>a.DiningTebleID, new SelectList(ViewBag.Data, "DiningTebleID", "Location"),"-------Select Dining Table-------")*@
+                    @Html.DropDownList("DiningTableID", new SelectList(ViewBag.Data, "DiningTableID", "Location"),"-------Select Dining Table-------")
 
                 </td>
             </tr>

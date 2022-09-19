@@ -189,7 +189,7 @@ namespace BusinessLogicLayer
             #region Public Methods Section
 
 
-            public DataTable InsertBillDetails( )
+            public void InsertBillDetails( )
             {
 
                 DataTable dtResult = new DataTable();
@@ -206,8 +206,8 @@ namespace BusinessLogicLayer
                 objSqlParam[8] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
                 objSqlParam[8].Direction = ParameterDirection.Output;
                 SqlHelper.ExecuteNonQuery(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Bill", objSqlParam);
-                return dtResult;
-            }
+                OutParam = Convert.ToInt16(objSqlParam[7].Value);
+        }
             
             #endregion
 

@@ -38,21 +38,23 @@ namespace Restaurant.Controllers
             return View();
         }
 
-
+        [HttpPost]
         public IActionResult InsertCuisine(ClsCuisionBLL objcu)
         {
-           
-            ClsCuisionBLL obj = new ClsCuisionBLL();
-            obj.CuisineName = objcu.CuisineName;
             
-            obj.RestaurantID = objcu.RestaurantID;
-            obj.InsertCuisineDetails();
-            if (obj.OutParam == 2)
-                ViewData["ResultInsert"] = "Cuisine details already exists!"; // for dislaying message after updating data.
-            else
-                ViewData["ResultInsert"] = "Data inserted successfully!";
-            GetRestaurant();
-            return View();
+                ClsCuisionBLL obj = new ClsCuisionBLL();
+                obj.CuisineName = objcu.CuisineName;
+
+                obj.RestaurantID = objcu.RestaurantID;
+                obj.InsertCuisineDetails();
+                if (obj.OutParam == 2)
+                    ViewData["ResultInsert"] = "Cuisine details already exists!"; // for dislaying message after updating data.
+                else
+                    ViewData["ResultInsert"] = "Data inserted successfully!";
+                GetRestaurant();
+                return View();
+           
+            
         }
 
         public void GetRestaurant()
@@ -108,7 +110,7 @@ namespace Restaurant.Controllers
         DataTable dt = objcubll.SelectCuisineByCuisineID();
         List<Cuisine> lstCuisine = new List<Cuisine>();
         Cuisine clsCuisine = new Cuisine();
-        clsCuisine.CuisineID = Convert.ToInt16(dt.Rows[0]["CuisineID"].ToString());
+        clsCuisine.CuisineID = Convert.ToInt32(dt.Rows[0]["CuisineID"].ToString());
         clsCuisine.RestaurantName = dt.Rows[0]["RestaurantName"].ToString();
         clsCuisine.CuisineName = dt.Rows[0]["CuisineName"].ToString();
         clsCuisine.Status = dt.Rows[0]["Status"].ToString();

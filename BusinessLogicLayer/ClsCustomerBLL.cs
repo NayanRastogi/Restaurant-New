@@ -84,17 +84,17 @@ namespace BusinessLogicLayer
                 _Status = value;
             }
         }
-        //public int UserID
-        //{
-        //    get
-        //    {
-        //        return _UserID;
-        //    }
-        //    set
-        //    {
-        //        _UserID = value;
-        //    }
-        //}
+        public int UserID
+        {
+            get
+            {
+                return _UserID;
+            }
+            set
+            {
+                _UserID = value;
+            }
+        }
         public Int32 PageIndex
         {
             private get
@@ -199,14 +199,37 @@ namespace BusinessLogicLayer
 
         #region Public Methods Section
 
-       
+        public DataTable SelectCustomer()
+        {
+            SqlParameter[] objSqlParam = new SqlParameter[9];
+            objSqlParam[0] = new SqlParameter("@Flag", 1);
+            objSqlParam[1] = new SqlParameter("@RestaurantID", RestaurantID);
+            objSqlParam[2] = new SqlParameter("@CustomerName", CustomerName);
+            objSqlParam[3] = new SqlParameter("@MobileNo", MobileNo);
+            objSqlParam[4] = new SqlParameter("@Status", "Available");
+            objSqlParam[5] = new SqlParameter("@UserId", 1);
+            objSqlParam[6] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
+            objSqlParam[6].Direction = ParameterDirection.Output;
+            objSqlParam[7] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
+            objSqlParam[7].Direction = ParameterDirection.Output;
+            objSqlParam[8] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
+            objSqlParam[8].Direction = ParameterDirection.Output;
+            DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Customer", objSqlParam);
+            //if (dsResult != null && dsResult.Tables.Count > 0)
+            //    dtResult = dsResult.Tables[0];
+            Error = Convert.ToString(objSqlParam[8].Value);
+            if (Error != string.Empty)
+            {
+                throw new ArgumentException(Error);
+            }
+            return dsResult.Tables[0];
+
+        }
         public void InsertCustomerDetails()
         {
 
-            DataTable dtResult = new DataTable();
             SqlParameter[] objSqlParam = new SqlParameter[9];
             objSqlParam[0] = new SqlParameter("@Flag", 2);
-            
             objSqlParam[1] = new SqlParameter("@RestaurantID", RestaurantID);
             objSqlParam[2] = new SqlParameter("@CustomerName", CustomerName);
             objSqlParam[3] = new SqlParameter("@MobileNo", MobileNo);
@@ -221,10 +244,8 @@ namespace BusinessLogicLayer
             SqlHelper.ExecuteNonQuery(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Customer", objSqlParam);
             OutParam = Convert.ToInt16(objSqlParam[7].Value);
         }
-        public DataTable UpdateCustomerDetails()
+        public void UpdateCustomerDetails()
         {
-
-            DataTable dtResult = new DataTable();
             SqlParameter[] objSqlParam = new SqlParameter[10];
             objSqlParam[0] = new SqlParameter("@Flag", 3);
             objSqlParam[1] = new SqlParameter("@CustomerID", CustomerID);
@@ -240,7 +261,7 @@ namespace BusinessLogicLayer
             objSqlParam[9] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
             objSqlParam[9].Direction = ParameterDirection.Output;
             SqlHelper.ExecuteNonQuery(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Customer", objSqlParam);
-            return dtResult;
+            
         }
 
         public DataTable DeleteCustomerDetails()

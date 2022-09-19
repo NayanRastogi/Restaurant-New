@@ -12,7 +12,7 @@ namespace BusinessLogicLayer
     public class ClsDiningTableBLL
     {
         #region Private Class Variables 
-        private int _DiningTebleID;
+        private int _DiningTableID;
         private int _RestaurantID;
         private String _Location;
         
@@ -28,15 +28,15 @@ namespace BusinessLogicLayer
         #endregion
 
         #region Public Properties
-        public int DiningTebleID
+        public int DiningTableID
         {
             get
             {
-                return _DiningTebleID;
+                return _DiningTableID;
             }
             set
             {
-                _DiningTebleID = value;
+                _DiningTableID = value;
             }
         }
         public int RestaurantID
@@ -193,7 +193,7 @@ namespace BusinessLogicLayer
         {
             SqlParameter[] objSqlParam = new SqlParameter[9];
             objSqlParam[0] = new SqlParameter("@Flag", 1);
-            objSqlParam[1] = new SqlParameter("@DiningTebleID", DiningTebleID);
+            objSqlParam[1] = new SqlParameter("@DiningTableID", DiningTableID);
             objSqlParam[2] = new SqlParameter("@RestaurantID", RestaurantID);
             objSqlParam[3] = new SqlParameter("@Location", Location);
            
