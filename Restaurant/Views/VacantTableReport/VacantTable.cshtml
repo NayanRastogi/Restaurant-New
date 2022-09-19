@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Restaurant.Models.VacantTableModel>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cuisine</title>
+
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            width: 75%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+     @using (Html.BeginForm("GetVacantTable", "VacantTableReport", FormMethod.Post, new { @class = "form-group" }))
+    {
+        <table>
+            <tr>
+                <th colspan="2"><h2>Vacant Table Details</h2></th>
+            </tr>
+          <tr>
+                <td>
+                    Restaurant Name:                    
+                </td>
+
+                <td>
+                  
+                    @Html.DropDownList("RestaurantID", new SelectList(ViewBag.Data, "RestaurantID", "RestaurantName"),"-------Select Restaurant-------")
+                    
+                    
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    
+                    <input id="Submit1" type="submit" value="Insert" class="btn-primary" />
+                </td>
+
+
+            </tr>
+            </table>
+     }
+    <table align="center">
+
+        <tr>
+            <th><h2>Vacant Table Detail</h2></th>
+        </tr>
+
+    </table>
+    
+    <table align="center">
+
+        <tr>
+            <th>S.No.</th>
+            <th>RestaurantName</th>
+            <th>Location</th>
+            <th>TableStatus</th>           
+        </tr>
+        @{
+            int i = 0;
+        }
+        @foreach (var d in Model)
+        {
+            <tr>
+
+                @{
+                    i++;
+                }
+              <td>@i</td>
+                <td>@d.RestaurantName</td>
+                <td>@d.Location</td>
+                <td>@d.TableStatus</td>               
+
+            </tr>
+        }
+    </table>
+</body>
+</html>

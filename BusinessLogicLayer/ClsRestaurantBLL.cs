@@ -19,6 +19,7 @@ namespace BusinessLogicLayer
         private string _MobileNo;
         private string _Status;
         private int _UserID;
+        private DateTime _YearWise;
 
         private Int32 _intPageIndex;
         private Int32 _intPageSize;
@@ -97,6 +98,20 @@ namespace BusinessLogicLayer
                 _UserID = value;
             }
         }
+
+        public DateTime YearWise
+        {
+            get
+            {
+                return _YearWise;
+            }
+            set
+            {
+                _YearWise = value;
+            }
+        }
+
+
         public Int32 PageIndex
         {
             private get
@@ -158,6 +173,7 @@ namespace BusinessLogicLayer
         #region Constructors
         public ClsRestaurantBLL()
         {
+            
 
         }
         #endregion
@@ -226,7 +242,7 @@ namespace BusinessLogicLayer
             return dsResult.Tables[0];
         }
 
-        public DataTable GetRestaurantByRestaurantID(int RestaurantID)
+        public DataTable GetRestaurantByRestaurantID()
         {
             DataTable dtResult = new DataTable();
             SqlParameter[] objSqlParam = new SqlParameter[7];
@@ -312,7 +328,38 @@ namespace BusinessLogicLayer
             return dtResult;
         }
 
+        public DataTable GetVacantTable()
+        {
+            DataTable dtResult = new DataTable();
+            SqlParameter[] objSqlParam = new SqlParameter[1];
+           
+            objSqlParam[0] = new SqlParameter("@RestaurantID", RestaurantID);
+           
+            DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "USP_GETVacantTablesReport", objSqlParam);
 
+            //Error = Convert.ToString(objSqlParam[9].Value);
+            //if (Error != string.Empty)
+            //{
+            //    throw new ArgumentException(Error);
+            //}
+            return dsResult.Tables[0];
+        }
+        public DataTable GetYearWiseOrderAmount()
+        {
+            DataTable dtResult = new DataTable();
+            SqlParameter[] objSqlParam = new SqlParameter[2];
+
+            objSqlParam[0] = new SqlParameter("@RestaurantID", RestaurantID);
+            objSqlParam[1] = new SqlParameter("@YearWise", YearWise);
+            DataSet dsResult = SqlHelper.ExecuteDataset(DBConnection.ConStr, CommandType.StoredProcedure, "USP_GETRestaurantwiseYearwiseReport", objSqlParam);
+
+            //Error = Convert.ToString(objSqlParam[9].Value);
+            //if (Error != string.Empty)
+            //{
+            //    throw new ArgumentException(Error);
+            //}
+            return dsResult.Tables[0];
+        }
 
         #endregion
     }

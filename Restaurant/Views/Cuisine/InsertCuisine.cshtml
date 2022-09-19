@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
-
+   
     <style type="text/css">
         input[type=text], select {
             width: 100%;
@@ -40,6 +40,28 @@
             font-weight: bold;
         }
     </style>
+    @section Scripts{
+
+
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+        <script type="text/javascript" src="/scripts/main.js"></script>
+        <script type="text/javascript">
+            $(function () {
+
+                $('#ddlRestaurant').on("change"(function () {
+                    debugger;
+                    alert('hii');
+                    //Get Dropdownlist seleted item text
+                   
+                    ViewData["ResName"] = $("#ddlRestaurant:selected").text();
+                    //Get Dropdownlist selected item value
+                    ViewData["ResId"] = $("#ddlRestaurant").val();
+                    //alert($("#UserId").val());
+                    alert("#ddlRestaurant");
+                })
+                    })
+        </script>
+    }
 </head>
 <body>
 
@@ -80,7 +102,7 @@
                 <td></td>
                 <td>
                     @*@Html.Hidden("RestaurantID", (object)@ViewBag.RestaurantID)*@
-                    <input id="Submit1" type="submit" value="Update" class="btn-primary" />
+                    <input id="Submit1" type="submit" value="Insert" class="btn-primary" />
                 </td>
 
 
@@ -88,14 +110,16 @@
         </table>
     }
 </body>
+
 </html>
 @{
     if (ViewData["ResultInsert"] != "" && ViewData["ResultInsert"] != null)
     {
         ViewData["ResultInsert"] = null;
-        <script type="text/javascript" language="javascript">
-            alert("Data Insert Successfully");
-        </script>
+    <script type="text/javascript" language="javascript">
+     alert("Data Insert Successfully");
+    </script>
     }
 
 }
+

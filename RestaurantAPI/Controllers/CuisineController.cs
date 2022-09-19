@@ -14,11 +14,27 @@ namespace RestaurantAPI.Controllers
     public class CuisineController : ControllerBase
     {
         ClsCuisionBLL ClsCuisinebll = new ClsCuisionBLL();
-
+       
         [HttpGet]
-        public ActionResult<IEnumerable<Cuisine>> SelectCuisine()
+        public ActionResult<IEnumerable<Cuisine>> SelectCuisineDetails()
         {
-            return SelectCuisine();
+            var Cuisinelist= ClsCuisinebll.SelectCuisine();
+            DataTable dt = new DataTable("Cuisine");
+            dt.Columns.Add("CuisineId", typeof(Int32));
+            dt.Columns.Add("CuisineName", typeof(string));
+            dt.Columns.Add("RestaurantID", typeof(string));
+            
+            List<Cuisine> CuisineList = new List<Cuisine>();
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                Cuisine objCu = new Cuisine();
+                objCu.CuisineID = Convert.ToInt32(dt.Rows[i]["CuisineID"]);
+                objCu.CuisineName = dt.Rows[i]["CuisineName"].ToString();
+                objCu.RestaurantID = Convert.ToInt32(dt.Rows[i]["RestaurantID"]);
+                
+                CuisineList.Add(objCu);
+            }
+            return (CuisineList);
             
         }
 

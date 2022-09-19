@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Restaurant.Models.YearWiseOrderAmountModel>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Cuisine</title>
+
+    <style type="text/css">
+        table {
+            border-collapse: collapse;
+            width: 75%;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 8px;
+            text-align: center;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2
+        }
+
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+    @using (Html.BeginForm("GetOrderAmount", "YearWiseOrderAmount", FormMethod.Post, new { @class = "form-group" }))
+    {
+        <table>
+          
+            <tr>
+                <td>
+                    Restaurant Name:
+                </td>
+
+                <td>
+
+                    @Html.DropDownList("RestaurantID", new SelectList(ViewBag.Data, "RestaurantID", "RestaurantName"),"-------Select Restaurant-------")
+
+
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Enter Year:
+                </td>
+
+                <td>
+                   @* @Html.TextBox("YearWise", String.Format("{0:d}", Model.ToShortDateString()),
+                new { @class = "datefield", type = "date" })*@
+                    @Html.Editor("YearWise")
+
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+
+                    <input id="Submit1" type="submit" value="Search" class="btn-primary" />
+                </td>
+
+
+            </tr>
+        </table>
+    }
+    <table align="center">
+
+        <tr>
+            <th><h3>Restaurant Wise Year Wise Total Order Amount Report</h3></th>
+        </tr>
+
+    </table>
+
+    <table align="center">
+
+        <tr>
+            <th>S.No.</th>
+            <th>RestaurantName</th>
+            <th>Year</th>
+            <th>Order Amount</th>
+        </tr>
+        @{
+            int i = 0;
+        }
+        @foreach (var d in Model)
+        {
+            <tr>
+
+                @{
+                    i++;
+                }
+                <td>@i</td>
+                <td>@d.RestaurantName</td>
+                <td>@d.YearWise</td>
+                <td>@d.OrderAmount</td>
+
+            </tr>
+        }
+    </table>
+</body>
+</html>

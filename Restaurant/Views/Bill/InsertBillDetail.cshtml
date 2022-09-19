@@ -1,0 +1,120 @@
+﻿@model Restaurant.Models.BillModel
+
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    @* <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>*@
+
+    <style type="text/css">
+        input[type=text], select {
+            width: 100%;
+            padding: 12px 20px;
+            margin: 8px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type=submit] {
+            width: 100%;
+            background-color: #4CAF50;
+            color: white;
+            padding: 14px 20px;
+            margin: 8px 0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
+
+        td {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    @using (Html.BeginForm("InsertBillDetail", "Bill", FormMethod.Post, new { @class = "form-group" }))
+    {
+        <table>
+            <tr>
+                <th colspan="2"><h2>Bill Details</h2></th>
+            </tr>
+            <tr>
+                <td>
+                    Restaurant Name:
+                </td>
+
+                <td>
+                   @* @Html.DropDownListFor(a =>a.RestaurantID, new SelectList(ViewBag.Data, "RestaurantID", "RestaurantName"),"-------Select Restaurant-------")*@
+                    @*@Html.DropDownListFor(a => a.RestaurantID, (SelectList)ViewBag.lstrest),"-------Select Restaurant-------")*@
+
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Customer Name:
+                </td>
+
+                <td>
+                   @* @Html.TextBoxFor(a => a.CustomerName)*@
+
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+               @* <td>@Html.ValidationMessageFor(a => a.CustomerName)</td>*@
+            </tr>
+
+            <tr>
+                <td>
+                    Mobile Number:
+                </td>
+
+                <td>
+                  @*  @Html.TextBoxFor(a => a.MobileNo)*@
+
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                @*<td>@Html.ValidationMessageFor(a => a.MobileNo)</td>*@
+            </tr>
+            <tr>
+
+            <tr>
+                <td></td>
+                <td>
+                        @* @Html.Hidden("RestaurantID", (object)@ViewBag.RestaurantID)*@
+                    <input id="Submit1" type="submit" value="Insert" class="btn-primary" />
+                </td>
+
+
+            </tr>
+        </table>
+    }
+
+</body>
+</html>
+@{
+    if (ViewData["ResultInsert"] != "" && ViewData["ResultInsert"] != null)
+    {
+        ViewData["ResultInsert"] = null;
+        <script type="text/javascript" language="javascript">
+            alert("Data Insert Successfully");
+        </script>
+    }
+
+}

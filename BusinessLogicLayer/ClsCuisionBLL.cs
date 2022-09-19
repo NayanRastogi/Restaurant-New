@@ -241,13 +241,13 @@ namespace BusinessLogicLayer
 
         }
 
-        public DataTable InsertCuisine(ClsCuisionBLL cb)
+        public DataTable InsertCuisineDetails(ClsCuisionBLL cb)
         {
 
             DataTable dtResult = new DataTable();
             SqlParameter[] objSqlParam = new SqlParameter[9];
             objSqlParam[0] = new SqlParameter("@Flag", 2);
-            objSqlParam[2] = new SqlParameter("@RestaurantID", cb.RestaurantID);
+            objSqlParam[2] = new SqlParameter("@RestaurantID",cb.RestaurantID);
             objSqlParam[3] = new SqlParameter("@CuisineName", cb.CuisineName);
             objSqlParam[4] = new SqlParameter("@Status", "Available");
             objSqlParam[5] = new SqlParameter("@UserId", 1);
@@ -261,7 +261,7 @@ namespace BusinessLogicLayer
             return dtResult;
         }
 
-        public DataTable UpdateCuisine( ClsCuisionBLL cb)
+        public DataTable UpdateCuisine(ClsCuisionBLL cb)
         {
 
             DataTable dtResult = new DataTable();

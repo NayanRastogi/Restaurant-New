@@ -9,7 +9,8 @@
     <meta name="viewport" content="width=device-width" />
     <title>Index</title>
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
-
+   @* <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>*@
+ 
     <style type="text/css">
         input[type=text], select {
             width: 100%;
@@ -39,7 +40,7 @@
         td {
             font-weight: bold;
         }
-    </style>
+   </style>
 </head>
 <body>
 
@@ -55,7 +56,9 @@
                 </td>
 
                 <td>
-                    @Html.DropDownList("RestaurantID", new SelectList(ViewBag.Data, "RestaurantID", "RestaurantName"),"-------Select Restaurant-------")
+                    @Html.DropDownListFor(a =>a.RestaurantID, new SelectList(ViewBag.Data, "RestaurantID", "RestaurantName"),"-------Select Restaurant-------")
+                    @*@Html.DropDownListFor(a => a.RestaurantID, (SelectList)ViewBag.lstrest),"-------Select Restaurant-------")*@
+                    
                 </td>
             </tr>
 
@@ -93,17 +96,23 @@
             <tr>
                <td></td>
                 <td>
-                    
+                       @* @Html.Hidden("RestaurantID", (object)@ViewBag.RestaurantID)*@
                     <input id="Submit1" type="submit" value="Insert" class="btn-primary" />
                 </td>
                 
 
             </tr>
+            <tr>
+                <td>
+                    @ViewData["ResultInsert"]
+                </td>
+            </tr>
         </table>
     }
+  
 </body>
 </html>
-@{
+@*@{
     if (ViewData["ResultInsert"] != "" && ViewData["ResultInsert"] != null)
     {
         ViewData["ResultInsert"] = null;
@@ -113,4 +122,4 @@
     }
 
 }
-
+*@

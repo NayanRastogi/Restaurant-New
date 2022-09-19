@@ -200,16 +200,16 @@ namespace BusinessLogicLayer
         #region Public Methods Section
 
        
-        public DataTable InsertCustomerDetails(ClsCustomerBLL cb)
+        public void InsertCustomerDetails()
         {
 
             DataTable dtResult = new DataTable();
             SqlParameter[] objSqlParam = new SqlParameter[9];
             objSqlParam[0] = new SqlParameter("@Flag", 2);
             
-            objSqlParam[1] = new SqlParameter("@RestaurantID", cb.RestaurantID);
-            objSqlParam[2] = new SqlParameter("@CustomerName",cb. CustomerName);
-            objSqlParam[3] = new SqlParameter("@MobileNo", cb.MobileNo);
+            objSqlParam[1] = new SqlParameter("@RestaurantID", RestaurantID);
+            objSqlParam[2] = new SqlParameter("@CustomerName", CustomerName);
+            objSqlParam[3] = new SqlParameter("@MobileNo", MobileNo);
             objSqlParam[4] = new SqlParameter("@Status", "Available");
             objSqlParam[5] = new SqlParameter("@UserId", 1);
             objSqlParam[6] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
@@ -219,7 +219,7 @@ namespace BusinessLogicLayer
             objSqlParam[8] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
             objSqlParam[8].Direction = ParameterDirection.Output;
             SqlHelper.ExecuteNonQuery(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Customer", objSqlParam);
-            return dtResult;
+            OutParam = Convert.ToInt16(objSqlParam[7].Value);
         }
         public DataTable UpdateCustomerDetails()
         {
