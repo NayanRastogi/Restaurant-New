@@ -34,45 +34,43 @@ namespace Restaurant.Controllers
 
         public IActionResult InsertCuisine()
         {
-            //objrebll.RestaurantID = Convert.ToInt16((RestaurantID).ToString());
-            List<RestaurantModel> lstRest = new List<RestaurantModel>();
-            DataTable dt = objrebll.GetRestaurant();
-            //var items = dt.To;
-            for (int i = 0; i < dt.Rows.Count; i++)
-            {
-
-                RestaurantModel objres = new RestaurantModel();
-                objres.RestaurantID = Convert.ToInt16(dt.Rows[i]["RestaurantID"].ToString());
-                objres.RestaurantName = dt.Rows[i]["RestaurantName"].ToString();
-
-                lstRest.Add(objres);
-
-
-            }
-            ViewBag.Data = lstRest;
-
-
-            //Cuisine clsCuisine = new Cuisine();
-            //DataTable result = objcubll.InsertCuisineDetails(ClsCuisionBLL objcu);
-            //ViewData["ResultInsert"] = result; // for dislaying message after updating data.
-            //return RedirectToAction("Cuisine", "Cuisine");
-
+            GetRestaurant();
             return View();
         }
 
 
-        //[HttpPost]
-        //public IActionResult InsertCuisine(ClsCuisionBLL objcu)
-        //{
-        //    //objrebll.RestaurantID = Convert.ToInt16((RestaurantID).ToString());
-        //    //string ResName = ViewData["ResName"].ToString();
-        //    // int ResId = Convert.ToInt16(ViewData["ResId"].ToString());
-        //    Cuisine clsCuisine = new Cuisine();
-        //    DataTable result = objcubll.InsertCuisineDetails(objcu);
-        //    ViewData["ResultInsert"] = result; // for dislaying message after updating data.
-        //    return View(clsCuisine);
+        public IActionResult InsertCuisine(ClsCuisionBLL objcu)
+        {
+           
+            ClsCuisionBLL obj = new ClsCuisionBLL();
+            obj.CuisineName = objcu.CuisineName;
+            
+            obj.RestaurantID = objcu.RestaurantID;
+            obj.InsertCuisineDetails();
+            if (obj.OutParam == 2)
+                ViewData["ResultInsert"] = "Cuisine details already exists!"; // for dislaying message after updating data.
+            else
+                ViewData["ResultInsert"] = "Data inserted successfully!";
+            GetRestaurant();
+            return View();
+        }
 
-   // }
+        public void GetRestaurant()
+    {
+        List<RestaurantModel> lstrest = new List<RestaurantModel>();
+        DataTable dt = objrebll.GetRestaurant();
+        //var items = dt.To;
+        for (int i = 0; i < dt.Rows.Count; i++)
+        {
+
+            RestaurantModel objres = new RestaurantModel();
+            objres.RestaurantID = Convert.ToInt16(dt.Rows[i]["RestaurantID"].ToString());
+            objres.RestaurantName = dt.Rows[i]["RestaurantName"].ToString();
+
+            lstrest.Add(objres);
+            ViewBag.Data = lstrest;
+        }
+    }
     // Edit gridview data
     public IActionResult EditCusine(int CuisineID)
     {

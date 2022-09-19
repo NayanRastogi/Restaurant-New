@@ -101,25 +101,24 @@
             <tr>
                 <td></td>
                 <td>
-                    @*@Html.Hidden("RestaurantID", (object)@ViewBag.RestaurantID)*@
+                 
                     <input id="Submit1" type="submit" value="Insert" class="btn-primary" />
                 </td>
 
 
+            </tr>
+           
+            <tr>
+                <td>
+                @ViewData["ResultInsert"]
+                </td>
             </tr>
         </table>
     }
 </body>
 
 </html>
-@{
-    if (ViewData["ResultInsert"] != "" && ViewData["ResultInsert"] != null)
-    {
-        ViewData["ResultInsert"] = null;
-    <script type="text/javascript" language="javascript">
-     alert("Data Insert Successfully");
-    </script>
-    }
+
 
 }
 

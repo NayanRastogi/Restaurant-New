@@ -241,24 +241,24 @@ namespace BusinessLogicLayer
 
         }
 
-        public DataTable InsertCuisineDetails(ClsCuisionBLL cb)
+        public void InsertCuisineDetails()
         {
 
             DataTable dtResult = new DataTable();
-            SqlParameter[] objSqlParam = new SqlParameter[9];
+            SqlParameter[] objSqlParam = new SqlParameter[8];
             objSqlParam[0] = new SqlParameter("@Flag", 2);
-            objSqlParam[2] = new SqlParameter("@RestaurantID",cb.RestaurantID);
-            objSqlParam[3] = new SqlParameter("@CuisineName", cb.CuisineName);
-            objSqlParam[4] = new SqlParameter("@Status", "Available");
-            objSqlParam[5] = new SqlParameter("@UserId", 1);
-            objSqlParam[6] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
+            objSqlParam[1] = new SqlParameter("@RestaurantID",RestaurantID);
+            objSqlParam[2] = new SqlParameter("@CuisineName", CuisineName);
+            objSqlParam[3] = new SqlParameter("@Status", "Available");
+            objSqlParam[4] = new SqlParameter("@UserId", 1);
+            objSqlParam[5] = new SqlParameter("@TotalRecord", SqlDbType.BigInt, 8);
+            objSqlParam[5].Direction = ParameterDirection.Output;
+            objSqlParam[6] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
             objSqlParam[6].Direction = ParameterDirection.Output;
-            objSqlParam[7] = new SqlParameter("@Out_Param", SqlDbType.TinyInt, 2);
+            objSqlParam[7] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
             objSqlParam[7].Direction = ParameterDirection.Output;
-            objSqlParam[8] = new SqlParameter("@Out_Error", SqlDbType.VarChar, 500);
-            objSqlParam[8].Direction = ParameterDirection.Output;
             SqlHelper.ExecuteNonQuery(DBConnection.ConStr, CommandType.StoredProcedure, "USP_Cuisine", objSqlParam);
-            return dtResult;
+            OutParam = Convert.ToInt16(objSqlParam[6].Value);
         }
 
         public DataTable UpdateCuisine(ClsCuisionBLL cb)
